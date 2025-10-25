@@ -1,10 +1,10 @@
 ### 1. Initial Setup
 
 - **Push code to GitHub**  
-  Push your project code to a GitHub repository.
+  Push project code to a GitHub repository.
 
 - **Create a Dockerfile**  
-  Write a `Dockerfile` in the root of your project to containerize the app.
+  Write a `Dockerfile` in the root of project to containerize the app.
 
 - **Create Kubernetes Deployemtn file**  
   Make a file named 'llmops-k8s.yaml' 
@@ -38,14 +38,14 @@
   git clone https://github.com/gopaldewoolkar/ANIME_RECOMMENDER_SYSTEM_LLMOPS
   ls
   cd ANIME_RECOMMENDER_SYSTEM_LLMOPS
-  ls  # You should see the contents of your project
+  ls  # You should see the contents of project
   ```
 
 - **Install Docker**
 
   - Search: "Install Docker on Ubuntu"
   - Open the first official Docker website (docs.docker.com)
-  - Scroll down and copy the **first big command block** and paste into your VM terminal
+  - Scroll down and copy the **first big command block** and paste into VM terminal
   - Then copy and paste the **second command block**
   - Then run the **third command** to test Docker:
 
@@ -141,9 +141,9 @@ git push origin main
 
 - When prompted:
   - **Username**: `Username`
-  - **Password**: GitHub token (paste, it's invisible)
+  - **Password**: GitHub token (paste, it's invisible and Enter)
 
----
+
 
 
 ### 5. Build and Deploy your APP on VM
@@ -161,23 +161,20 @@ kubectl create secret generic llmops-secrets \
 kubectl apply -f llmops-k8s.yaml
 
 kubectl get pods
+```
 
-
-### U will see pods runiing
+### you will see pods runiing
 
 # Do minikube tunnel on one terminal
 
-minikube tunnel
+`minikube tunnel`
 
 
 # Open another terminal
 
-kubectl port-forward svc/llmops-service 8501:80 --address 0.0.0.0
+`kubectl port-forward svc/llmops-service 8501:80 --address 0.0.0.0`
 
 ## Now copy external ip and :8501 and see ur app there....
-
-
-```
 
 ### 6. GRAFANA CLOUD MONITORING
 
@@ -187,12 +184,13 @@ kubectl port-forward svc/llmops-service 8501:80 --address 0.0.0.0
 kubectl create ns monitoring
 
 kubectl get ns
+```
 
 ## Make account on Grfaana cloud
 
 ### Install HELM - Search on Google
 -- Copy commands from script section..
--- U will get 3 commands
+-- you will get 3 commands
 
 
 ## Come to grafana cloud --> Left pane observability --> Kubernetes--> start sending data
@@ -206,21 +204,22 @@ kubectl get ns
 
 
 ## Come to terminal --> Create a file
-> vi values.yaml
+> `vi values.yaml`
 
 
-## Paste all from there to your file now remove last EOF part & and also initial part save that initial part we need it..
+## Paste all from there to file now remove last EOF part & and also initial part save that initial part we need it..
 
 Example : 
-
+```
 helm repo add grafana https://grafana.github.io/helm-charts &&
   helm repo update &&
   helm upgrade --install --atomic --timeout 300s grafana-k8s-monitoring grafana/k8s-monitoring \
     --namespace "monitoring" --create-namespace --values - <<'EOF'
+```
 
 ### Remove this above intial part and save it somewhere
 
-Then Esc+wq! amd save the file
+Then `Esc+wq!` amd save the file
 
 ## Now use the copied command just make some modification:
 Remove that EOF part and instead write
